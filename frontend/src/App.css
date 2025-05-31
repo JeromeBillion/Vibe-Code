@@ -1,38 +1,211 @@
-.App {
-    text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
-.App-link {
-    color: #61dafb;
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.2s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Custom gradient text utility */
+.gradient-text {
+  @apply bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent;
+}
+
+/* Custom card hover effects */
+.stock-card {
+  @apply transform hover:scale-105 hover:shadow-2xl transition-all duration-300;
+}
+
+/* Investment button animation */
+.invest-btn {
+  @apply relative overflow-hidden;
+}
+
+.invest-btn::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 transition-opacity duration-300;
+}
+
+.invest-btn:hover::before {
+  @apply opacity-100;
+}
+
+.invest-btn span {
+  @apply relative z-10;
+}
+
+/* Portfolio metrics animation */
+.portfolio-metric {
+  @apply transform hover:scale-105 transition-transform duration-200;
+}
+
+/* Custom input focus states */
+.custom-input:focus {
+  @apply ring-2 ring-blue-500 ring-opacity-50 border-blue-500;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .mobile-padding {
+    @apply px-4 py-2;
+  }
+  
+  .mobile-text {
+    @apply text-sm;
+  }
+}
+
+/* Dark mode friendly colors */
+.dark-card {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark-text {
+  @apply text-gray-200;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.gpu-acceleration {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Accessibility improvements */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Stock price change indicators */
+.price-up {
+  @apply text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.price-down {
+  @apply text-red-600 bg-red-50 px-2 py-1 rounded-full text-xs font-medium;
+}
+
+/* Custom backdrop blur for modern browsers */
+.backdrop-blur-custom {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Investment flow animations */
+.slide-in-right {
+  @apply transform translate-x-full opacity-0;
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    @apply transform translate-x-0 opacity-100;
+  }
+}
+
+.slide-in-left {
+  @apply transform -translate-x-full opacity-0;
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  to {
+    @apply transform translate-x-0 opacity-100;
+  }
+}
+
+/* Success indicators */
+.success-checkmark {
+  @apply text-green-500 text-2xl;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  80% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Portfolio growth indicators */
+.growth-indicator {
+  @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.growth-positive {
+  @apply bg-green-100 text-green-800;
+}
+
+.growth-negative {
+  @apply bg-red-100 text-red-800;
+}
+
+/* Loading states */
+.skeleton {
+  @apply bg-gray-200 rounded animate-pulse;
+}
+
+.skeleton-text {
+  @apply h-4 bg-gray-200 rounded animate-pulse;
+}
+
+/* Investment amount input styling */
+.amount-input {
+  @apply text-2xl font-bold text-center border-2 border-gray-300 rounded-lg py-4 px-6 focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+}
+
+/* Portfolio cards */
+.portfolio-card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200;
+}
+
+/* Navigation active states */
+.nav-active {
+  @apply text-blue-600 bg-blue-50 border-blue-200;
+}
+
+.nav-inactive {
+  @apply text-gray-600 hover:text-gray-900 hover:bg-gray-50;
 }
